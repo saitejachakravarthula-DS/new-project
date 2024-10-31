@@ -1,0 +1,124 @@
+Stock Price Predictor - Setup and Running Instructions
+================================================
+
+1. Project Structure
+-------------------
+Ensure your project has the following structure:
+
+```
+stock-predictor/
+├── backend/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── model.keras           # Your trained LSTM model
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   │   ├── StockChart.tsx
+    │   │   └── StockForm.tsx
+    │   ├── services/
+    │   │   └── api.ts
+    │   ├── App.tsx
+    │   ├── main.tsx
+    │   └── index.css
+    ├── package.json
+    ├── index.html
+    └── tailwind.config.js
+
+2. Backend Setup
+---------------
+a. Create and activate a Python virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+b. Install backend dependencies:
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   ```
+
+c. Place your trained LSTM model:
+   - Save your Keras model as 'model.keras'
+   - Place it in the backend directory
+
+d. Start the backend server:
+   ```bash
+   python main.py
+   ```
+   The backend will run on http://localhost:8000
+
+3. Frontend Setup
+----------------
+a. Install Node.js dependencies:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+b. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   The frontend will run on http://localhost:5173
+
+4. Using the Application
+-----------------------
+1. Open your browser and navigate to http://localhost:5173
+2. Enter a stock symbol (e.g., AAPL, GOOGL)
+3. Select the prediction timeframe (7, 14, or 30 days)
+4. Choose the data interval (daily, weekly, or monthly)
+5. Click "Predict Stock Price"
+6. View the results in the interactive chart
+
+5. Important Notes
+-----------------
+- Ensure both backend and frontend servers are running simultaneously
+- The backend requires an active internet connection to fetch stock data
+- The model expects 60 days of historical data for predictions
+- Predictions are based on closing prices
+- The application uses FastAPI for the backend and React with TypeScript for the frontend
+
+6. Troubleshooting
+-----------------
+If you encounter issues:
+
+1. Backend errors:
+   - Check if the model file is present and correctly named
+   - Verify Python dependencies are installed
+   - Ensure the virtual environment is activated
+   - Check port 8000 is available
+
+2. Frontend errors:
+   - Clear npm cache: npm cache clean --force
+   - Delete node_modules and reinstall: rm -rf node_modules && npm install
+   - Check if port 5173 is available
+   - Verify API_URL in src/services/api.ts matches backend URL
+
+3. CORS issues:
+   - Verify the frontend origin is listed in backend CORS settings
+   - Check browser console for CORS-related errors
+
+7. Model Requirements
+--------------------
+Your LSTM model should:
+- Accept 60 days of historical data as input
+- Output single day predictions
+- Be saved in Keras format (.keras)
+- Use MinMaxScaler for data preprocessing
+
+8. Development
+-------------
+To modify the project:
+
+1. Backend modifications:
+   - Edit main.py for API changes
+   - Update model parameters in prepare_sequence_data()
+   - Modify prediction logic in make_predictions()
+
+2. Frontend modifications:
+   - Components are in src/components/
+   - API calls are in src/services/api.ts
+   - Main layout is in App.tsx
+   - Styling uses Tailwind CSS

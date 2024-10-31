@@ -1,0 +1,8 @@
+fastapi==0.109.2
+uvicorn==0.27.1
+pandas==2.2.0
+numpy==1.26.4
+yfinance==0.2.36
+tensorflow==2.15.0
+scikit-learn==1.4.1.post1
+python-dotenv==1.0.1
